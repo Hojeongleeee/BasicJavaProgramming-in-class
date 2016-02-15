@@ -1,0 +1,17 @@
+
+public class mainClass {
+
+	public static void main(String[] args) {
+		
+		Player yourself = new Player();
+		Player computer = new Player();
+		
+		while (yourself.time<=10 && computer.time<=10){
+			yourself.playing();
+			computer.playing();
+		}
+
+
+	}
+
+}

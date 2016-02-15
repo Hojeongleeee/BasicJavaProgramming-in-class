@@ -1,0 +1,39 @@
+
+public class Player extends YutBundle {
+	
+	int score, time;
+	
+	private int getScore(){
+		int n = throwingAll();
+		if (n==0){//모
+			n=5;
+		} else if (n==5){//백도 
+			n=-1;
+		}
+		return n;
+	}
+	
+	
+	public void playing (){
+		int result = getScore();
+
+			while (true){ //윷, 모가 나오는 이상 무한 재시도 가능
+				if (result>3){
+					score += result;
+				} else {
+					score += result;
+					time++;
+					break; //player의 턴이 종료됨
+				} //한번 더 판단 if문 끝
+				
+			} //while 끝
+
+	} //playing끝
+	
+	private void printResult (){ ///////////////////////////////////////
+		// 1번째부터 10번째까지 결과를 각각 출력하게 만들 것
+		String ystate[] = new String []{"백도","모","도","개","걸","윷"}; //-1,0,1,2,3,4 
+			//출력을 위해 배면의 갯수에 따른 String을 배열로 선
+		System.out.println("윷놀이 결과 : "+ystate[1]+"입니다.");
+	}
+}

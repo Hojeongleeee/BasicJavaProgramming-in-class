@@ -1,0 +1,48 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class Postgraduate extends Student{
+	Scanner scan = new Scanner(System.in);
+	
+	String tutor[] = {"문봉희","김주균","최영우","이상규","유석종"};	//지도교수 (5명한정)
+	int tutorNo=0;
+	String thesis[] = {"주제1","주제2","주제3","주제4","주제5"};	//연구주제
+	int thesisNo;
+	boolean assistance; //교육조교=1, 연구조교=0 
+	
+	Postgraduate(String name, int m, int semester){
+		super(name, m, semester);
+		Postgraduate2();
+	}
+	
+	private void Postgraduate2(){
+		System.out.println("<지도교수 목록>");
+		System.out.println("1.문봉희\n2.김주균\n3.최영우\n4.이상규\n5.유석종");
+		System.out.print("지도교수 번호:");
+		int t = scan.nextInt();
+		while (t==0||t>5){
+			System.out.println("잘못입력했으니 다시하세요!");
+			this.tutorNo=scan.nextInt();
+		}
+		System.out.print("교육조교는 1, 연구조교는 0:");
+		assistance = (scan.nextInt()==1?true:false);
+	}
+		
+	public void printSpec(boolean assistance){
+		//오버라이딩 하세유!!
+		System.out.println("지도교수:"+tutor[tutorNo]);
+		System.out.println("연구주제:"+thesis[thesisNo]);
+		System.out.println("조교여부:"+assistance=="true"?"교육조교":"연구조교");
+	}
+	
+	void paperRegist(){
+		this.thesisNo=thesisRandom();
+		//조교 저장
+	}
+	
+	int thesisRandom(){
+		Random random = new Random();
+		int thesisNo = random.nextInt(5);
+		return thesisNo;
+	}
+}

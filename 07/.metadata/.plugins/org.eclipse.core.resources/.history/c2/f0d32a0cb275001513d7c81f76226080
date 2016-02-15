@@ -1,0 +1,47 @@
+
+public class ㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ {
+	System.out.println("");
+	//1. 엔진타입 - autoCar에 저장
+	System.out.println("1. 엔진 타입을 입력하세요");
+	System.out.println("1.가솔린");
+	System.out.println("2.디젤");
+	System.out.println("3.LPG");
+	System.out.print("엔진타입:");
+	pick = scan.nextInt();
+	while (!autoCar.setEngineType(pick)) {
+		System.out.println("다시 입력하세요");
+		pick = scan.nextInt();
+	}
+	
+	//2. 엔진용량 - autoCar에 저장
+	System.out.println("2. 엔진 용량을 입력하세요 (ex: 3000)");
+	System.out.print("엔진용량:");
+	engineCapa = scan.nextInt(); //정수형이므로 바로 capa에 대입
+	while (!autoCar.setEngineCapa(engineCapa)){
+		System.out.println("다시 입력하세요");
+		engineCapa = scan.nextInt();
+	}
+	
+	//3. 색상 - autoCar에 저장
+	System.out.println("3. 자동차의 색상을 입력하세요");
+	System.out.println("1.백색");
+	System.out.println("2.검정");
+	System.out.println("3.노랑");
+	System.out.println("4.파랑");
+	System.out.println("5.빨강");
+	System.out.println("6.보라");
+	System.out.print("색상:");
+	color = scan.nextInt(); //정수형이므로 바로 capa에 대입
+	while (!autoCar.setCarColor(color)){
+		System.out.println("다시 입력하세요");
+		color = scan.nextInt();
+	}
+	//4. 승차인원 - autoCar에 저장
+	System.out.println("4. 승차인원을 입력하세요 (ex: 2)");
+	System.out.print("승차인원:");
+	int capa = scan.nextInt(); //정수형이므로 바로 capa에 대입
+	while (!autoCar.setCapacity(capa)){
+		System.out.println("다시 입력하세요");
+		capa = scan.nextInt();
+	}
+}

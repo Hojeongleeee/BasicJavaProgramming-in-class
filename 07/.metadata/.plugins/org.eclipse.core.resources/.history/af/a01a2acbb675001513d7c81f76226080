@@ -1,0 +1,71 @@
+
+public class Truck extends Car {
+	private int wheels=0;
+	private int load;
+	
+	public Truck(){
+		super();
+	}
+	
+	public Truck(String engineType, int engineCapa, int wheels, int load){
+		super(3, engineType, engineCapa);
+		
+		this.wheels=wheels;
+		this.load=load;
+	}
+	
+	public void printTruck(){
+		System.out.println("-----------È­¹°Â÷-----------");
+		System.out.println("1. ¿£ÁøÅ¸ÀÔ: µğÁ©");
+		System.out.println("2. ¿£Áø¿ë·®: 3000, 4000, 5000");
+		System.out.println("3. ¹ÙÄû ¼ö: 4, 6, 10");
+		System.out.println("4. È­¹° ÀûÀç·®: 1Åæ, 5Åæ, 10Åæ");
+		System.out.println("--------------------------");
+	}
+	
+	public boolean setEngineType(int type) {
+		this.engineType = "µğÁ©";
+		return true;
+	}
+	
+	public boolean setEngineCapa(int capa) {
+		if (capa!=3000
+			|| capa!=4000
+			|| capa!=5000)
+			return false;
+		
+		this.engineCapa = capa;
+		return true;
+	}
+	
+	public boolean setWheels(int wheels) {
+		if (wheels!=4
+			|| wheels!=6
+			|| wheels!=10)
+			return false;
+		this.wheels = wheels;
+		return true;
+	}
+	
+	public boolean setLoad(int load) {
+		if (load != 1
+			|| load != 5
+			|| load != 10)
+			return false;
+		
+		this.load = load;
+		return true;
+	}
+
+	@Override
+	public void drive() {
+		// TODO Auto-generated method stub
+		System.out.println("¤·¤·?");
+	}
+
+	@Override
+	public void result() {
+		// TODO Auto-generated method stub
+		
+	}
+}

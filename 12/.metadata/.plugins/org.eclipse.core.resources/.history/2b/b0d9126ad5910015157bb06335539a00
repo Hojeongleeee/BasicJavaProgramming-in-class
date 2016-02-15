@@ -1,0 +1,70 @@
+import java.io.*;
+import java.net.*;
+import java.nio.ByteBuffer;
+import java.util.Scanner;
+
+public class ClientClass extends Thread {
+
+	public static void main(String[] args) throws IOException {
+
+		Scanner scan = new Scanner(System.in);
+		Socket c = new Socket("127.0.0.1", 8888); //소켓(받는이)
+		
+		OutputStream os = c.getOutputStream();
+		DataOutputStream dos = new DataOutputStream(os);
+		InputStream is = c.getInputStream();
+		DataInputStream dis = new DataInputStream(is);
+
+	
+		System.out.print("명령어 입력:");
+		String inputCommand = scan.nextLine();
+		int length = 0;
+		dos.write(inputCommand.getBytes());
+		//명령어 out
+		
+
+		//응답방식을 결정할 switch문
+		int dirOrFile = dis.readInt();
+		switch (dirOrFile){
+		case 1 : //rdir
+			//rdir 출력
+			length=dis.read();
+			for (int i=0;i<length;i++){
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				byte[] buf = new byte[30];
+				dis.read(buf);
+				String str = new String(buf);
+				System.out.println(str.trim());
+			}
+			System.out.println("rdir print end");
+
+			break; //switch 끝
+		case 2 : //get filename
+			//파일명 전송받기
+	//		String fileName = dis.readUTF(); //파일명 전송받음
+			String fileName = "test.txt";
+			System.out.println("파일명 "+fileName+"을 전송받습니다.");
+	//		fileName = fileName.replaceAll("a", "test.txt");
+
+			//파일기록
+			int len;
+			byte [] sendFile = new byte[4096]; //4MB
+			while ((len=dis.read(sendFile))!=-1){
+				//파일을 데이터 단위로 쓰기
+				dos.write(sendFile, 0, len);
+			}
+			dos.flush(); //파일에다가 기록
+			System.out.println("파일전송완료");
+			break;
+		case 3 : //오타
+			
+			break;
+		}
+		c.close();
+	}//main 끝
+
+}

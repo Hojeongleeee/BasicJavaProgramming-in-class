@@ -1,0 +1,28 @@
+
+import java.util.Scanner;
+public class Practice4_1_1 {
+	private static int s;
+	public static void main(String[] args) {
+		
+		// TODO Auto-generated method stub
+		int h, l; // 밑변과 높이 입력
+		float s;  // 넓이는 실수형으로 
+		Scanner scan = new Scanner (System.in);
+		
+		System.out.print("높이:");
+		h = scan.nextInt();
+		System.out.print("밑변:");
+		l = scan.nextInt();
+		
+		s = Triangle(h,l); // Triangle 메소드에 h,l를 인수로 넣어 결과값을 s에
+		System.out.println("넓이:"+s); 
+	}
+	public static float Triangle/*메소드명*/ (int height, int length){
+			// 밑변, 높이를 인수로 받아서 넓이를 return하는 메소드 (float이어야함)
+		float tri; //넓이는 실수 tri 변수로 정의
+		tri = ((float)height*length)/2; 
+			//높이와 밑변이 정수이므로 한 가지만이라도 형변환을 해주어야 tri가 float형태로 나타남
+		return tri; //tri를 메소드의 결과로 돌려줌 (float)
+		}
+
+}

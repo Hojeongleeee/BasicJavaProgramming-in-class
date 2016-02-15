@@ -1,0 +1,15 @@
+
+public class Bus {
+	private String busType = "버스종류";
+	private int capacity;
+	
+	public Bus(){
+		super();
+	}
+	
+	public Bus(String engineType, int engineCapa, String busType, int capacity){
+		super(2, engineType, engineCapa);
+		this.busType=busType;
+		this.capacity=capacity;
+	}
+}

@@ -1,0 +1,113 @@
+import java.util.Scanner;
+
+public class Dealer {
+
+	private static Scanner scan = new Scanner(System.in);
+
+	public static void main(String[] args) {
+
+		int menu=0;
+		
+		menu=firstmenu();
+		Order order = new Order(menu); //주문 객체 생성하기 (공통속성값 기본으로)
+		
+		switch (menu){ //차종마다 필요한 옵션에 대한 명세서 출력 및 주문받기 
+		case 1: //승용차
+			//order객체
+			AutoMobile auto1 = new AutoMobile(order.getA(),order.getB(),order.getOp1(),order.getOp2());
+			break;
+		case 2: //버스
+			//order객체			
+			Bus bus1 = new Bus(order.getA(),order.getB(),order.getOp1(),order.getOp2());
+			break;
+		case 3: //트럭
+			//order객체			
+			Truck truck1 = new Truck(order.getA(),order.getB(),order.getOp1(),order.getOp2());
+			break;
+		} //switch문 끝
+
+		
+		/*******구매한 자동차 정보 최종 출력**********/
+		switch (menu){
+		case 1:
+			System.out.println("구매한 자동차");
+			break;
+		case 2:
+			System.out.println("구매한 버스");
+			break;
+		case 3:
+			System.out.println("구매한 트럭");
+			break;
+		}
+		
+	} //main 끝
+
+	/*******구매한 자동차 정보 최종 출력**********/
+	
+	private void autoResult(AutoMobile auto1){
+		int a=auto1.engineNum;
+		String b=auto1.engineType;
+		int c=auto1.engineCapa;
+		String d=auto1.color;
+		int e=auto1.capacity;
+		
+		System.out.println("엔진번호:"+a);
+		System.out.println("엔진타입:"+b);
+		System.out.println("엔진용량:"+c);
+		System.out.println("색상:"+d+"색");
+		System.out.println("승차인원:"+e+"명");
+	}
+	private void busResult(Bus bus1){
+		int a=bus1.engineNum;
+		String b=bus1.engineType;
+		int c=bus1.engineCapa;
+		String d=bus1.bustype;
+		int e=bus1.capacity;
+		
+		System.out.println("엔진번호:"+a);
+		System.out.println("엔진타입:"+b);
+		System.out.println("엔진용량:"+c);
+		System.out.println("버스종류:"+d);
+		System.out.println("승차인원:"+e+"명");
+		
+	}
+	private void truckResult(Truck truck1){
+		int a=truck1.engineNum;
+		String b=truck1.engineType;
+		int c=truck1.engineCapa;
+		int d=truck1.wheels;
+		int e=truck1.load;
+		
+		System.out.println("엔진번호:"+a);
+		System.out.println("엔진타입:"+b);
+		System.out.println("엔진용량:"+c);
+		System.out.println("바퀴수:"+d+"개");
+		System.out.println("화물적재량:"+e+"톤");
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	/**********구매할 차종 선택하기*******/
+	static int firstmenu(){
+		int menu = 0;
+		do {
+			System.out.println("------차량 주문------");
+			System.out.println("원하는 차량을 선택하세요");
+			System.out.println("1.승용차");
+			System.out.println("2.버스");
+			System.out.println("3.화물차");
+			menu = scan.nextInt();
+		}	while(menu>3);
+		
+		return menu;
+	}
+
+	
+
+} //class끝
+

@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Postgraduate extends Student{
+	Scanner scan = new Scanner(System.in);
+	
+	String tutor[] = new String[5];	//조교 (5명한정)
+	String thesis;	//연구주제
+	boolean assistance; //교육조교=1, 연구조교=0 
+	
+	Postgraduate(String name, int m){
+		super();
+		Postgraduate2();
+	}
+	
+	void Postgraduate2(){
+		this.assistance = scan.nextBoolean();
+		int t = scan.nextInt();
+		this.tutor[t-1]="조교이름뭐야";
+	}
+		
+	void printSpec(){
+		//오버라이딩 하세유!!
+	}
+	
+	void paperRegist(int t, String thesis){
+		this.thesis = thesis;
+		//조교 저장
+	}
+}

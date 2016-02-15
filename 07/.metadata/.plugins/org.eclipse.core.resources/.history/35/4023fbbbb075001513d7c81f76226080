@@ -1,0 +1,64 @@
+
+public class Truck extends Car {
+	private int wheels=0;
+	private int load;
+	
+	public Truck(){
+		super();
+	}
+	
+	public Truck(String engineType, int engineCapa, int wheels, int load){
+		super(3, engineType, engineCapa);
+		
+		this.wheels=wheels;
+		this.load=load;
+	}
+	
+	public void printTruck(){
+		
+		
+		
+		
+	}
+	
+	public boolean setEngineType(int type) {
+		this.engineType = "µðÁ©";
+		return true;
+	}
+	
+	public boolean setEngineCapa(int capa) {
+		if (capa!=1500
+			|| capa!=2000
+			|| capa!=2500
+			|| capa!=3000)
+			return false;
+		
+		this.engineCapa = capa;
+		return true;
+	}
+	
+	public boolean setWheels(int wheels) {
+		if (wheels!=4
+			|| wheels!=6
+			|| wheels!=10)
+			return false;
+		this.wheels = wheels;
+		return true;
+	}
+	
+	public boolean setLoad(int load) {
+		if (load != 1
+			|| load != 5
+			|| load != 10)
+			return false;
+		
+		this.load = load;
+		return true;
+	}
+
+	@Override
+	public void drive() {
+		// TODO Auto-generated method stub
+		
+	}
+}

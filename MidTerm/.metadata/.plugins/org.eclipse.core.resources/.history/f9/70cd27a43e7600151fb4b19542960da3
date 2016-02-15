@@ -1,0 +1,39 @@
+package SuperTest3;
+
+class yupeuteo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		A4 a4 = new A4();
+	}
+
+}
+
+class A1{
+	
+	A1(){
+		System.out.println("A1 묵시적 생성자 수행");
+	}
+}
+
+class A2 extends A1 {
+	
+	A2(){
+		System.out.println("A2 묵시적 생성자 수행");
+	}
+}
+
+class A3 extends A2 {
+	int i=2, j=5;
+	A3(int i, int j){
+		System.out.println("A3 명시적 생성자 수행, i+j="+(i+j));
+	}
+}
+
+class A4 extends A3 {
+	
+	A4(){
+		super(5,7); //없으면 안되는 생성자
+		System.out.println("없으면 안되는 생성자, A4 묵시적 생성자 수행+super(5,7)수행");
+	}
+}

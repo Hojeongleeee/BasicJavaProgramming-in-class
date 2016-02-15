@@ -1,0 +1,27 @@
+
+public class Car {
+	//상위 클래스
+	//모든 자동차에 공통적인 기본 속성
+	//Super를 통해 호출될 메소드들
+	
+	static public int engineNum;
+	int engineCapa;
+	String engineType;
+	
+	Car(){
+		engineCapa=0;
+		engineType="기본값";
+		engineNum++;
+	}
+	
+	Car(String engineType, int engineCapa){
+		Car aCar = new Car();
+		this.engineType = engineType;
+		this.engineCapa = engineCapa;
+	}
+	
+	
+	void drive(){
+		//
+	}
+}

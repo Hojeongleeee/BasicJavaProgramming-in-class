@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Person implements Comparable{
+
+	Scanner scan = new Scanner(System.in);
+	
+	String name;
+	double height;
+	double weight;
+	int scoreBMI;	
+	
+	Person(){
+		System.out.print("이름:");
+		this.name=setName();
+		System.out.print("키:");
+		this.height=setHeight();
+		System.out.print("몸무게:");
+		this.weight=setWeight();
+		this.scoreBMI=(int)(weight/((height-100)*0.9)*100);
+	}
+	
+
+	@Override
+	public int compareTo(Object obj) {
+		Person person = (Person)obj;
+		//this.scoreBMI(person)
+		
+		if(this.scoreBMI>=getScoreBMI(person)) //this>person
+			return 1;
+		else 
+			return 0;
+		
+	}
+
+	//getter
+	private int getScoreBMI(Person person) {
+		return person.scoreBMI;
+	}
+	
+	
+	//setter
+	private double setWeight() {
+		double weight=scan.nextDouble();
+		return weight;
+	}
+
+	private double setHeight() {
+		double height=scan.nextDouble();
+		return height;
+	}
+	
+	private String setName() {
+		String name=scan.nextLine();
+		return	name;
+	}
+
+
+
+
+}

@@ -1,0 +1,174 @@
+/* P1315594_7_이호정 (경영학부)
+ * 자동차 주문서 작성 프로그램
+ * Order.java - 주문생성자에 포함된 주문내용(값) 저장 프로세스
+ */
+import java.util.Scanner;
+
+
+public class Order{
+
+	static Scanner scan = new Scanner(System.in);
+
+	Car orderedCar; // 주문한 차량
+
+	Order(int menu){
+		//생성자 디폴트 Order(승용차트럭버스중에1)
+		//주문받자마자 주문객체 생성하겠다!
+
+		orderSetting(menu); //menu번호에 따라 주문 다르게 실행
+	}
+
+
+	/***************************차종별 주문 메소드*******************************/
+
+
+	private void orderSetting(int carDefine) {
+		int pick = 0;
+		int engineCapa;
+		int type;
+
+		switch(carDefine) {
+		case 1:
+			// TODO 승용차용 프로세스
+			AutoMobile autoCar = new AutoMobile();
+
+			autoCar.printAuto(); // 선택할수 있는 사양 출력
+
+			System.out.println("");
+			//1. 엔진타입 - autoCar에 저장
+			System.out.println("1. 엔진 타입을 입력하세요");
+			System.out.println("1.가솔린");
+			System.out.println("2.디젤");
+			System.out.println("3.LPG");
+			System.out.print("엔진타입:");
+			pick = scan.nextInt();
+			while (!autoCar.setEngineType(pick)) {
+				System.out.println("다시 입력하세요");
+				pick = scan.nextInt();
+			}
+
+			//2. 엔진용량 - autoCar에 저장
+			System.out.println("2. 엔진 용량을 입력하세요 (ex: 3000)");
+			System.out.print("엔진용량:");
+			engineCapa = scan.nextInt(); //정수형이므로 바로 capa에 대입
+			while (!autoCar.setEngineCapa(engineCapa)){
+				System.out.println("다시 입력하세요");
+				engineCapa = scan.nextInt();
+			}
+
+			//3. 색상 - autoCar에 저장
+			System.out.println("3. 자동차의 색상을 입력하세요");
+			System.out.println("1.백색");
+			System.out.println("2.검정");
+			System.out.println("3.노랑");
+			System.out.println("4.파랑");
+			System.out.println("5.빨강");
+			System.out.println("6.보라");
+			System.out.print("색상:");
+			type = scan.nextInt(); //정수형이므로 바로 capa에 대입
+			while (!autoCar.setCarColor(type)){
+				System.out.println("다시 입력하세요");
+				type = scan.nextInt();
+			}
+			//4. 승차인원 - autoCar에 저장
+			System.out.println("4. 승차인원을 입력하세요 (ex: 2)");
+			System.out.print("승차인원:");
+			int capa = scan.nextInt(); //정수형이므로 바로 capa에 대입
+			while (!autoCar.setCapacity(capa)){
+				System.out.println("다시 입력하세요");
+				capa = scan.nextInt();
+			}
+
+			// 설정한 정보를 주문한 차량에 넣음
+			orderedCar = autoCar;
+			break;
+		case 2:
+			// TODO 버스용 프로세스
+			Bus busCar = new Bus();
+
+			busCar = printBus();
+			
+			System.out.println("");
+			//1. 엔진타입 - a에 저장
+			System.out.println("1. 엔진 타입을 입력하세요");
+			System.out.println("1.디젤");
+			System.out.println("2.LNG");
+			System.out.print("엔진타입:");
+			pick = scan.nextInt();
+			while(!busCar.setEngineType(pick)){
+				System.out.println("다시 입력하세요");
+				pick = scan.nextInt();
+			}
+
+
+			//2. 엔진용량 - b에 저장
+			System.out.println("2. 엔진 용량을 입력하세요 (ex: 3000)");
+			System.out.print("엔진용량:");
+			engineCapa = scan.nextInt();
+			while (!busCar.setEngineCapa(engineCapa)){
+				System.out.println("다시 입력하세요");
+				engineCapa=scan.nextInt();
+			}
+
+			//3.  버스종류 - op1에 저장
+			System.out.println("3. 버스종류를 선택하세요");
+			System.out.println("1.고속버스(45인승)");
+			System.out.println("2.일반버스(60인승)");
+			System.out.print("버스종류:");
+			pick = scan.nextInt();
+			while (!busCar.setBusType(pick)){
+				System.out.println("다시 입력하세요");
+				pick = scan.nextInt();
+			}
+
+			// 설정한 정보를 주문한 차량에 넣음
+			orderedCar = busCar;
+			break;
+		case 3:
+			// TODO 트럭용 프로세스
+			Truck truckCar = new Truck();
+
+			System.out.println("");
+
+			//2. 엔진용량 - b에 저장
+			System.out.println("1. 엔진 용량을 입력하세요 (ex: 3000)");
+			System.out.print("엔진용량:");
+			engineCapa = scan.nextInt();
+			while (!truckCar.setEngineCapa(engineCapa)){
+				System.out.println("다시 입력하세요");
+				engineCapa = scan.nextInt();
+			}
+
+			//3. 바퀴수 - op1에 저장
+			System.out.println("2. 트럭의 바퀴 수를 입력하세요 (ex: 6)");
+			System.out.print("바퀴수:");
+			type = scan.nextInt();
+			while (!truckCar.setWheels(type)){
+				System.out.println("다시 입력하세요");
+				type = scan.nextInt();
+			}
+
+			//4. 화물적재량- op2에 저장
+			System.out.println("3. 트럭의 화물적재량(톤)을 입력하세요 (ex: 1)");
+			System.out.print("화물적재량(톤):");
+			type = scan.nextInt();
+			while (!truckCar.setLoad(type)){
+				System.out.println("다시 입력하세요");
+				type = scan.nextInt();
+			}
+			// 설정한 정보를 주문한 차량에 넣음
+			orderedCar = truckCar;
+			break;
+		}
+
+	}
+
+	public void orderprint(Car orderedCar){
+		
+		System.out.println("엔진번호:"+orderedCar.engineNum);
+		System.out.println("엔진타입:"+orderedCar.engineType);
+		System.out.println("엔진용량:"+orderedCar.engineCapa);
+		orderedCar.result();
+	}
+
+} //class끝

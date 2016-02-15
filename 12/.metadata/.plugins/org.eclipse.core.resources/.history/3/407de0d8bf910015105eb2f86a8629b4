@@ -1,0 +1,100 @@
+import java.io.*;
+import java.net.*;
+import java.nio.ByteBuffer;
+import java.util.Scanner;
+
+public class ServerClass {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		ServerSocket sc;
+		sc = new ServerSocket(13579);
+		
+		//파일
+		File defaultFile = new File("./");
+		File[] dirFileList = defaultFile.listFiles();
+		
+		//스캐너, times
+		Scanner scan = new Scanner(System.in);
+		int times = 0; //서버접근횟수 times
+
+		
+		//서버 100번 열림
+		while (times<100){ //10번까지 서버에 접근할 수 있음
+			
+			//시작-------------------------------------------------------
+			Socket c = sc.accept(); //클라이언트의 요청 받아들이는 소켓
+			System.out.println("클라이언트 접근 "+sc.getLocalSocketAddress());
+			times++;
+			
+			//Stream 객체 생성-------------------------------------------------------
+			OutputStream os = c.getOutputStream();
+			DataOutputStream dos = new DataOutputStream(os);
+			InputStream is = c.getInputStream();
+			DataInputStream dis = new DataInputStream(is);
+			BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
+//			BufferedOutputStream bos = new BufferedOutputStream(os);
+			byte[] buf = new byte[30];
+	
+			//명령어 in-------------------------------------------------------
+			
+			int length = 0;
+			String inputCommand = new String();
+			dis.read(buf);
+			inputCommand=new String(buf).trim();
+			System.out.println(inputCommand);
+			
+			
+
+			//테스트*************************************************
+			inputCommand="rdir";
+			//출력 -------------------------------------------------------
+			if (inputCommand.equals("rdir")){
+
+				length=dirFileList.length;
+				dos.write(length);
+				for (int i=0;i<length;i++){
+					dos.write(dirFileList[i].getName().getBytes());
+					dos.flush();
+//					String str=new String();
+//					buf=str.getBytes();
+//					bos.write(buf);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				} //for 끝
+				
+				System.out.println("rdir End");	
+			}//rdir if
+			
+			else if (inputCommand.contains("get")){
+				inputCommand.codePointAt(3); //get  다음
+				length=dirFileList.length;
+				for (int i=0;i<length;i++){
+					if (inputCommand.equals(dirFileList[i].getName())
+							&& dirFileList[i].isFile()){
+			/**
+			 * 파일주기ㅇㄹㅇㄹㅈㅇㄹㅈㅇㄹㅈㅇㄹㅈㅇㄹㅈㅇㄹㅈㅇㄹㅈㅇㄹ
+			 * 이것도안됨
+			 * 
+			 * 
+			 * 
+			 * 
+			 */
+						break;
+					}
+				}
+				System.out.println("get File End");
+			} //else if 끝
+			else {
+				System.out.println("invalid Command");
+			}
+			System.out.println("Client Closed");
+		} //while 끝
+		sc.close();
+		System.out.println("Server Closed");
+	}//main끝
+}

@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class Results {
+
+	public static void main(String[] args) {
+		
+		//객체 생성하기, 10명
+		Person people[] = new Person[10];
+		for (int i=0;i<people.length;i++){
+			Person person = new Person();
+			people[i] = person; //생성된 객체 배열에 저장
+			System.out.print("건강지수: "+person.getScoreBMI()+"\n"); //입력받은 직후 건강수도 출력
+		}
+		
+		//정렬 함수로 배열 다시쓰기
+		sorting(people);
+		
+
+		int[] seg = segmentation(people);	
+		
+		//순서 출력
+		for(int i=0;i<10;i++)
+			System.out.println((i+1)+": "+people[i].getName()+" (건강지수:"+people[i].getScoreBMI()+")");
+		
+		//정상, 마른, 비만 인원수 출력
+		System.out.println("정상:"+segment[0]+" 마른:"+segment[1]+" 비만:"+segment[2]);
+	}
+
+	//정상, 마른, 비만 인원수 세기
+	public static int[] segmentation(Person[] person) {
+		//객체 검색해서 정상, 마른, 비만 각 배열값에 1씩 증가시키기
+		int segment[] = new int[3];//인덱스: normal=0, thin=1, fat=2
+		
+		for (int i=0; i<person.length; i++){ //이미 정렬이 다 된 배열을 받아서 위에서부터 검사, index를 인원수에 활용
+			// 120 이상일 경우 비만, 90 이상일경우 마른
+			if (person[i].getScoreBMI()>120){
+				segment[2]++; //비만
+			} else if (person[i].getScoreBMI()>90){
+				segment[0]++; //정상
+			} else {
+				segment[1]=person.length-segment[2]-segment[0]; //마른
+				break; //for문나감
+			}
+		}//for끝
+		
+		return segment;
+	}//정상마른비만 끝
+
+
+	//Bubble Sort
+	public static void sorting(Person people[]){ //return 없음
+		for (int i=0;i<people.length;i++){
+			for (int j=i+1;j<people.length;j++){
+				Person person1 = people[i];
+				Person person2 = people[j];
+				if (person2.compareTo(person1)==1){
+					//person1>person2일 경우 자리바꿈
+					people[i]=person2;
+					people[j]=person1;
+					 //배열은 매개변수를 통한 복사본이 아닌, 원본 조작 가능
+				}//if끝
+			}//j끝
+		}//i끝
+		
+	}//sorting끝
+}
+

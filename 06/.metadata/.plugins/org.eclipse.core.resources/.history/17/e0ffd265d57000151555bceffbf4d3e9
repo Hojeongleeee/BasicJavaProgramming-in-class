@@ -1,0 +1,19 @@
+
+public class mainClass {
+
+	public static void main(String[] args) {
+		
+		Player yourself = new Player();
+		Player computer = new Player();
+		
+		while (yourself.time<=10 && computer.time<=10){
+			System.out.println("\n사용자의 "+yourself.time+"회 윷 던지기 결과 : ");
+			yourself.playing();
+			System.out.println("\n컴퓨터의 "+computer.time+"회 윷 던지기 결과 : ");
+			computer.playing();
+		}
+
+
+	}
+
+}

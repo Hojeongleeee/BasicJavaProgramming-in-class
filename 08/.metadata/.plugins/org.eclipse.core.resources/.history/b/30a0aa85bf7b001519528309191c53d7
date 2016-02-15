@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Student {
+	static Scanner scan = new Scanner(System.in);
+	
+	String major[] = new String[5]; //전공 5가지로 한정
+	String name; //학생이름
+	static int studentNo; //학번 중복없이 순차적으로 부여
+	int sumScore[] = new int[8]; //학기마다 이수학점
+	int semester; //현재학기
+	
+	Student(){ //생성자
+		studentNo++;
+	}
+	
+	Student(String name, int m){
+		this();
+		this.name=name;
+		//전공 대입
+	}
+	
+	void takingCredits(int semester, int score){
+		this.semester = semester;
+		sumScore[semester] = score;
+	}
+	
+	void printStudent(int studentNo){
+		System.out.println("학번:");
+		System.out.println("이름:");
+		System.out.println("전공:");
+		System.out.println("총 이수학점:");
+		for (int i=1; i<=8; i++){
+			if (sumScore[i-1]!=0){
+				System.out.println(i+"학기 이수학점: "+sumScore[i-1]);	
+			} //if끝
+		}//for끝
+		printSpec(); //대학원생, 학부생 서로 다른 출력결과값을 오버라이딩하기
+	}
+	
+	void printSpec(){
+		//오버라이딩 하세유!!
+	}
+} // class 끝

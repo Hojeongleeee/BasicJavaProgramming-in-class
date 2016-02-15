@@ -1,0 +1,119 @@
+/*
+ * 서버는 열린다.
+ * 서버는 폴더를 보여준다 (show)
+ * 클라이언트는 폴더를 보고서 폴더명을 입력한다 (typeDirName)
+ * 폴더명은 서버에게 전달된다.
+ * 서버는 폴더명을 자기가 가진것과 비교한다.
+ * 클라이언트가 보낸 typeDirName이 폴더명이면 - 폴더로 들어가기 아니면 - 명령어 다시 입력받기
+ * 클라이언트는 폴더로 들어갔으면 들어갔다는 알림을 받고 다시 명령어를 입력할 것.
+ * 
+ * ServerSide.java 프로그램에 저장되어 있는 directory의 내용을 Client 요청에 따라서 보여주고 선택한 파일(text 파일)명을 Client가 요청하면 이 파일을 전송하여 화면에 출력하는 프로그램을 작성하시오.
+ * 
+ */
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+public class ServerSide {
+
+	public static void main(String[] args) throws IOException {
+		ServerSocket sc;
+		sc = new ServerSocket(13579);
+		
+		Scanner scan = new Scanner(System.in);
+		int times = 0; //서버접근횟수 times
+		
+		while (times<10){ //10번까지 서버에 접근할 수 있음
+			
+			//디폴트 파일 폴더 설정하고, 해당 디렉토리의 모든 파일/폴더들을 File[]배열에 저장
+			File currentFile = new File("./");
+			File[] dirFileList = currentFile.listFiles();
+			//FileWriter fw = new FileWriter(currentFile);
+
+			byte[] strBuff = new byte[19999]; //공간확보
+
+			Socket c = sc.accept(); //클라이언트의 요청 받아들이는 소켓
+			System.out.println("클라이언트 접근 "+sc.getLocalSocketAddress());
+			times++;
+			
+			//OutputStream, InputStream 객체 생성
+			OutputStream os = c.getOutputStream();
+			DataOutputStream dos = new DataOutputStream(os);
+			InputStream is = c.getInputStream();
+			DataInputStream dis = new DataInputStream(is);
+			
+			//rdir 명령시 문자를 출력할 string Buffer를 Byte로 선언 ? 바이트로 하면 안되나.........?
+			dos.writeInt(dirFileList.length);
+			for (int i=0;i<dirFileList.length;i++){
+				dos.write(dirFileList[i].getName().getBytes()); //strBuff에 InputStream저장, Byte형태로 들어옴
+			}
+			String inputCommand = new String(strBuff); //byte를 String으로
+			
+			System.out.println(inputCommand); //받은 명령어
+			String[] command = inputCommand.split(" "); //띄어쓰기를 기준으로 앞, 뒤로 나눔
+			
+			
+			switch (command[0]){ //rdir or get
+
+			/**********************************************************************/		
+
+			/*
+			 * rdir <폴더명> 명령어를 받는 경우
+			 * 폴더명인지 파일명인지 아닌지 확인하기
+			 * 폴더명이면 폴더로 접근해서 OutputStream 출력하고 break
+			 * 파일명이거나 오타이면 break
+			 */
+			case "rdir" : //rdir 폴더명 형태의 명령문
+				int i=0;
+
+				// 존재하는 이름이며, 폴더일때 
+				for (i=0;i<dirFileList.length;i++){
+					if (command[1].equals(dirFileList[i].getName())
+							&&dirFileList[i].isDirectory()){
+						dirFileList = dirFileList[i].listFiles(); //폴더 접근
+						for (int n=0;n<dirFileList.length;n++){ //접근한 폴더 내부에 요청
+							String str = dirFileList[n].getName();
+							strBuff = str.getBytes(); //string을 byte로
+							dos.writeBytes(str); //Client에게 출력
+						}
+						break; //switch(서버역할) 끝내기
+					} //if 끝
+				} //for 끝
+
+				//폴더명이 아닐때
+				dos.writeBytes("Try Again (invalid folder name)");
+				break; //switch (서버역할) 끝내기
+
+				/**********************************************************************/		
+
+				/*
+				 * get ____ 명령어를 받는 경우
+				 * 파일명인지 폴더명인지 아닌지 확인하기
+				 * 파일명이면 파일 FileOutputStream ㄱㄱ하고 break
+				 * 폴더명이거나 오타이면 break
+				 */
+
+			case "get" :
+				i=0;
+				if (command[1].equals(dirFileList[i].getName())
+						&&dirFileList[i].isFile()){
+					FileOutputStream fos = new FileOutputStream(dirFileList[i]);
+					fos.write(strBuff); //file을 byte로, Client에게 OutputStream
+					break;
+				}
+				//파일명이 아닐때
+				dos.writeBytes("Try Again (invalid file name)");
+				break;		
+			default :
+				//명령어가 rdir도 아니고 get도 아닐때
+				dos.writeBytes("Try Again (invalid command");
+				break;
+			} //switch
+			System.out.println(i+"/"+times+" Socket Finish");
+			sc.close();	
+		} //while
+	
+
+	} //main
+}
+

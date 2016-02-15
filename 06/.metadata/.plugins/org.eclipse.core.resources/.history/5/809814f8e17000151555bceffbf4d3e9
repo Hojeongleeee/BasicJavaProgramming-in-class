@@ -1,0 +1,67 @@
+
+public class Player extends YutBundle {
+	
+	int score = 0; //현재까지 누적된 총점수를 score로 정의	
+	int time = 1; //현재까지 몇 턴을 던졌는지 time으로 정의
+	int result = 0; //윷을 던질 때 1회 마다의 결과 저장
+	boolean chk = true;
+	public void playing (){ //1턴 당 발생하는 사건
+
+			while (chk=true){ //윷, 모가 나오는 이상 무한 재시도 가능
+				result = throwingAll(); 
+					//result : 배면의 갯수, ystate배열의 index로 쓰임
+				
+				switch (result) {
+				case 5 : result = 5;
+					score--;
+					printResult(result);
+					chk = false;
+					break;
+				case 4 : result = 4;
+					score+=result;
+					printResult(result);
+					break;
+				case 0 : result = 0;
+					score+=5;
+					printResult(result);
+					break;
+				default:
+					score+=result;
+					printResult(result);
+					chk = false;
+					break;
+				}
+				
+/**
+//				if (result == 5){ //result가 5이면 백도
+//					score -= 1; 
+//					printResult(result);
+//					break;//player의 턴이 종료됨
+//				} else if (result == 0){
+//					score += 5; //result가  모일때 +5 후 while문 탈출 없이 계속진행
+//					printResult(result);
+//				} else if (result == 4) {
+//					score += result; //result가  윷일때 +4 후 while문 탈출 없이 계속진행
+//					printResult(result); 
+//				} else {
+//					score += result; //result가 1,2,3 이면 도, 개, 걸
+//					printResult(result);
+//					break; //player의 턴이 종료됨
+//				}//한번 더 판단 if문 끝
+**/
+				
+			} //while 끝 = 턴 끝
+			time++; //턴 1회 증가시키기
+
+	} //playing()끝
+	
+	private void printResult (int i){ 
+			// i는 throwingAll()의 return값 (배면의 갯수)
+		
+		String ystate[] = new String []{"모","도","개","걸","윷","백도"}; 
+			//0,1,2,3,4,5 index로 쓰이는 숫자는 배면의 갯수
+			//throwingAll()로부터 백도의 값은 5로 저장
+		System.out.print(" "+ystate[i]); // 윷 던지기 결과를 화면에 표시
+	} //printResult()끝
+	
+}

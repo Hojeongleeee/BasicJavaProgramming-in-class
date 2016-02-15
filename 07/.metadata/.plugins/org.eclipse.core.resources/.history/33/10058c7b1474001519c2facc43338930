@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Dealer {
+
+	private static Scanner scan = new Scanner(System.in);
+
+	public static void main(String[] args) {
+
+		int menu=0;
+		
+		menu=firstmenu();
+		Order makeOrder1 = new Order(menu); //주문 객체 생성하기 (공통속성값 기본으로)
+		
+		
+		printEngine(makeOrder1); //주문번호 입력하면 주문내역 (aCar) 출력
+		
+		
+	}
+
+	
+	private static void printEngine(Order makeOrder){
+		
+		
+	}
+	
+	
+	static int firstmenu(){
+		int n = 0;
+		do {
+			System.out.println("------차량 주문------");
+			System.out.println("원하는 차량을 선택하세요");
+			System.out.println("1.AutoMobile");
+			System.out.println("2.Bus");
+			System.out.println("3.Truck");
+			n = scan.nextInt();
+		}	while(n>3);
+		
+		return n;
+	}
+
+	
+
+} //class끝
+

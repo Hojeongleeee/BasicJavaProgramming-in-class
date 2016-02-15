@@ -1,0 +1,17 @@
+
+public class Bus extends Car {
+	String bustype; //고속버스, 시내버스
+	int capacity; //고속버스(45인), 시내버스(60인)
+	
+	
+	
+	void drive(){
+		if (bustype=="고속버스"){
+			System.out.println("최고 100Km/h 제한속도");
+		} else {
+			System.out.println("최고 60Km/h 제한속도");
+		}
+		
+	}
+	
+}

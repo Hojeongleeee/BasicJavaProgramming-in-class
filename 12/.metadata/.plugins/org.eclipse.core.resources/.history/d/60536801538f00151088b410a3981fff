@@ -1,0 +1,16 @@
+package fileTest;
+import java.io.*;
+
+public class FileTest {
+
+	public static void main(String[] args) throws IOException {
+		File newdir = new File("/src");
+		System.out.println("1."+newdir.getAbsolutePath());
+		System.out.println("2."+newdir.getName());
+		System.out.println("3."+newdir.getCanonicalPath());
+		newdir.getPath();
+		File[] dirfilelist = newdir.listFiles();
+		System.out.println();
+	}
+
+}

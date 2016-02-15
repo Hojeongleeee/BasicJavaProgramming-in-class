@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class mainClass {
+
+	public static void main(String[] args) {
+		
+		Player yourself = new Player();
+		Player computer = new Player();
+		
+		System.out.println("=========================================");
+		System.out.println("엔터키를 칠 때마다 1회씩 윷놀이를 합니다!");
+		System.out.println("총 10회 진행되며, 사용자와 컴퓨터가 겨루어 최종 승자를 가립니다!");
+		System.out.println("=========================================");
+		
+		Scanner scan = new Scanner(System.in);
+		
+		while (yourself.time<=10 && computer.time<=10){
+			System.out.print("\n사용자의 "+yourself.time+"회 윷 던지기 결과 : ");
+			yourself.playing();
+			System.out.print("\t현재까지의 점수: "+yourself.score);
+			System.out.print("\n컴퓨터의 "+computer.time+"회 윷 던지기 결과 : ");
+			computer.playing();
+			System.out.print("\t현재까지의 점수: "+computer.score);
+			
+			scan.nextLine(); //엔터칠때마다 다음 회 진행
+		} //while문 종료, 모든 게임 종료
+		
+		
+		//최종 게임 종료 결과
+		if (yourself.score==computer.score){
+			System.out.println("동점입니다");
+		} else {
+			String winner = new String(yourself.score>computer.score ? "사용자" : "컴퓨터");
+			System.out.println("\n\n최종 승자는 "+ winner +"입니다.");
+		}
+		scan.close();
+	}
+}

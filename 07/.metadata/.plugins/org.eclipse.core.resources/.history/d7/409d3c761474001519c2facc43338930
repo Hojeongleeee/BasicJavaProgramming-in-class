@@ -1,0 +1,12 @@
+
+public class AutoMobile extends Car {
+	String color;
+	int capacity;
+	
+	
+	
+	void drive(){
+		System.out.println("최고 110Km/h 제한속도");
+	}
+	
+}

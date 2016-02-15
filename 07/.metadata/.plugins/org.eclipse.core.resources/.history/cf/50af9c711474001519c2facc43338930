@@ -1,0 +1,12 @@
+
+public class Truck extends Car {
+	int wheels; //¹ÙÄû¼ö 4, 6, 10
+	int ghkanfwjrwofid; //1Åæ, 5Åæ, 10Åæ
+	
+	
+	
+	void drive(){
+		System.out.println("ÃÖ°í 80Km/h Á¦ÇÑ¼Óµµ");
+	}
+	
+}

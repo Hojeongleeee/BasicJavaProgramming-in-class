@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+
+public class Order extends Car{
+	
+	private static Scanner scan = new Scanner(System.in);
+
+	
+	
+	Order(int menu){
+		//생성자 디폴트 Order(승용차트럭버스중에1)
+		//주문받자마자 주문객체 생성하겠다!
+		
+		Car car1 = new Car(selectEngineType(menu),selectEngineCapa(menu)); 
+			//너가 산 차!! 일단 생성자로 엔진용량, 엔진번호, 엔진타입 설정 
+			//주문객체 생성자 안에 자동차객체 생성자를 넣어놓음
+			//주문하지 않으면 차를 생성하지 않겠다는 의지
+			// 승용차/트럭/버스 중에 1
+		
+		switch(menu){ //menu번호에 따라 주문 다르게 실행
+		case 1:
+			car1 = automobileOrder();
+			break;
+		case 2:
+			car1 = truckOrder();
+			break;
+		case 3:
+			car1 = busOrder();
+			break;
+		}
+	}
+
+	
+
+	 
+private int selectEngineCapa(int menu) {
+		System.out.println("엔진용량 선택하세요");
+		switch(menu){
+		case 1: //자동차
+			System.out.println("ㅇㅇ");
+		case 2: //트럭
+			System.out.println("ㅇㅇ");
+		case 3: //버스
+			System.out.println("ㅇㅇ");
+		default:
+			System.out.println("?");
+		}
+		int a = scan.nextInt();
+		return a;
+	}
+
+
+
+
+private String selectEngineType(int menu) {
+		System.out.println("엔진타입 선택하세요");
+		switch(menu){
+		case 1: //자동차
+			System.out.println("ㅇㅇ");
+		case 2: //트럭
+			System.out.println("ㅇㅇ");
+		case 3: //버스
+			System.out.println("ㅇㅇ");
+		default:
+			System.out.println("?");
+		}
+		String eType = scan.next();
+		return eType;
+	}
+
+
+
+
+/***************************차종별 주문 메소드*******************************/
+	 
+	 AutoMobile automobileOrder(){
+		 AutoMobile aAutoMobile;
+		 //초기화
+		 //승용차 주문 (값 주기)
+		 return aAutoMobile;
+	 }
+	 
+	 Truck truckOrder(){
+		 Truck aTruck;
+		 //초기화
+		 //트럭 주문 (값 주기)
+		 return aTruck;
+	 }
+	 
+	 Bus busOrder(){
+		 Bus aBus;
+		 //초기화
+		 //버스 주문 (값 주기)
+		 return aBus;
+	 }
+} //class끝

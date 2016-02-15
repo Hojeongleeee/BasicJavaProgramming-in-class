@@ -1,0 +1,30 @@
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+//	/textDirectory/text1.txt
+
+public class ClientSide {
+
+	public static void main(String[] args) throws IOException {
+
+		Scanner scan = new Scanner(System.in);
+		Socket c = new Socket("127.0.0.1",80); //소켓(받는이)
+		
+		OutputStream os = c.getOutputStream();
+		DataOutputStream dos = new DataOutputStream(os);
+		InputStream is = c.getInputStream();
+		DataInputStream dis = new DataInputStream(is);
+		
+		//명령어 입력받기
+		System.out.print("명령어 입력:");
+		String command = scan.nextLine();
+		dos.writeBytes(command);
+		
+		byte[] rBuff = new byte[199999];
+		dis.read(rBuff); //입력결과 받아오기
+		String printString = new String(rBuff);
+		System.out.println(printString);
+		
+		c.close();
+	}
+}

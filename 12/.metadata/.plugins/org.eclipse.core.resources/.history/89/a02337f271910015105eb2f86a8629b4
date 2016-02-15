@@ -1,0 +1,42 @@
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+//	/textDirectory/text1.txt
+
+public class ClientSide {
+
+	public static void main(String[] args) throws IOException {
+
+		Scanner scan = new Scanner(System.in);
+		Socket c = new Socket("127.0.0.1", 13579); //소켓(받는이)
+		
+		OutputStream os = c.getOutputStream();
+		DataOutputStream dos = new DataOutputStream(os);
+		InputStream is = c.getInputStream();
+		DataInputStream dis = new DataInputStream(is);
+		OutputStreamWriter osw = new OutputStreamWriter(os);
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		
+		byte[] rBuff = new byte[199999];
+		
+		//초기 파일/폴더 목록 보여주기
+		//int length = dis.readInt(); //파일리스트배열길이
+		for (int i=0; i<dis.readInt();i++){
+			dis.read(rBuff);
+		}
+		dis.readFully(rBuff);
+		////////////////////////////////////////
+				
+		System.out.print("명령어 입력:");
+		String command = scan.nextLine();
+		dos.writeBytes(command);//string으로 보내기
+		
+
+		
+		String printString = new String(rBuff);
+		System.out.println(printString);
+		
+		c.close();
+	}
+}

@@ -1,0 +1,11 @@
+
+public class Practice_4 {
+	public static void main (String[] args){
+		//public, private : 클래스 유형 정의 (Practice 내에서만 활용 : Public)
+		//클래스 : 필요할 때 마다 꺼내쓰는 단위
+		//객관화 : 라이브러리로 등록해놓고 이름만 가져다 쓰는 것 (ex:Scanner)
+		
+		
+		
+	}
+}

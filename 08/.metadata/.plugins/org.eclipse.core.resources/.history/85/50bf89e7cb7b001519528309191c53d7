@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Postgraduate extends Student{
+	Scanner scan = new Scanner(System.in);
+	
+	String tutor[] = {"문봉희","김주균","최영우","이상규","유석종"};	//지도교수 (5명한정)
+	int tutorNo=0;
+	String thesis;	//연구주제
+	boolean assistance; //교육조교=1, 연구조교=0 
+	
+	Postgraduate(String name, int m, int semester){
+		super(name, m, semester);
+		Postgraduate2();
+	}
+	
+	private void Postgraduate2(){
+		this.assistance = scan.nextBoolean();
+		
+		System.out.println("<지도교수 목록>");
+		System.out.println("1.문봉희\n2.김주균\n3.최영우\n4.이상규\n5.유석종");
+		System.out.print("지도교수 번호:");
+		int t = scan.nextInt();
+		while (t==0||t>5){
+			System.out.println("잘못입력했으니 다시하세요!");
+			this.tutorNo=scan.nextInt();
+		}
+	}
+		
+	public void printSpec(){
+		//오버라이딩 하세유!!
+	}
+	
+	void paperRegist(){
+		int t=scan.nextInt();
+		String thesis = thesisRandom();
+		this.thesis = thesis;
+		//조교 저장
+	}
+}

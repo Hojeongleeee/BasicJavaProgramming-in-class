@@ -1,0 +1,33 @@
+
+public class Undergraduate extends Student {
+	
+	int year;
+	String clubActName[] = new String[5];
+	//생성자에서 scan받아서 멤버변수에저장하기!!
+
+	
+	Undergraduate(String name, int m){
+		super(name, m);
+		Undergraduate2();
+	}
+	void Undergraduate2(){
+		//scan받으삼
+		int year=scan.nextInt();
+		//String clubActName[] 에 순서대로 저장하기!
+		
+	}
+	
+	void printSpec(){
+		//오버라이딩 하세유!!
+	}
+	
+	void clubActRegist(int c){
+		//저장
+		String clubname="null";
+		for (int i=1; i<=5; i++){
+			clubname = scan.next();
+			clubActName[i-1]=clubActName[i-1]!="null"?clubname:null;
+		}
+	}
+
+}

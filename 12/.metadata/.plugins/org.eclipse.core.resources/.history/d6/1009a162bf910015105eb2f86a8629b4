@@ -1,0 +1,56 @@
+import java.io.*;
+import java.net.*;
+import java.nio.ByteBuffer;
+import java.util.Scanner;
+
+public class ClientClass extends Thread {
+
+	public static void main(String[] args) throws IOException {
+
+		Scanner scan = new Scanner(System.in);
+		Socket c = new Socket("127.0.0.1", 13579); //소켓(받는이)
+		
+		OutputStream os = c.getOutputStream();
+		DataOutputStream dos = new DataOutputStream(os);
+		OutputStreamWriter osw = new OutputStreamWriter(os);
+		InputStream is = c.getInputStream();
+		DataInputStream dis = new DataInputStream(is);
+		InputStreamReader isr = new InputStreamReader(is);
+		PrintWriter pw = new PrintWriter(os);
+		
+		byte[] buf = new byte[10];
+		ByteBuffer bbuf = ByteBuffer.wrap(buf);
+		BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
+		BufferedOutputStream bos = new BufferedOutputStream(os);
+	
+		System.out.print("명령어 입력:");
+		String inputCommand = scan.nextLine();
+		int length = 0;
+		buf=inputCommand.getBytes();
+		bos.write(buf);
+		//명령어 out
+		
+		//rdir 출력
+		length=dis.read();
+		for (int i=0;i<length;i++){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			String str = new String();
+//			StringBuilder sb = new StringBuilder();
+//			while((br.readLine())!=null){
+//				sb.append(str);
+//			}
+//			System.out.println(sb);
+			dis.read(buf);
+			str = new String(buf);
+			System.out.println(str);
+		}
+		System.out.println("rdir print end");
+		c.close();
+	}//main 끝
+
+}

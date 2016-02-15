@@ -1,0 +1,72 @@
+/************************************
+R1315594_2_이호정 (경영학부) 과제2
+
+Lotto(복권)는 1부터 46까지의 숫자 중 6개를 맞추는 것이다. 
+6개의 Lotto 숫자를 발생시키는 프로그램을 작성하시오.
+ - 1과 46 사이의 숫자를 발생하는 클래스를 정의하여 작성할 것
+ - 출력하는 숫자들은 작은 수부터 큰 수로 정렬할 것
+ - 6개의 숫자 중 중복되는 숫자가 있으면 안됨
+ - 입력과 출력을 사용자 인터페이스를 고려할 것
+ ************************************/
+import java.util.Random;
+
+public class Lotto2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int LottoNum [] = {0,0,0,0,0,0};
+
+		/**번호추출**/
+		
+		for (int n=0; n<=5; n++)
+		{
+			RandomPicking.GetN(n);
+		}
+		
+		Sorting(LottoNum); //6개의 숫자를 차례대로 정렬하는 메소드
+		
+		System.out.print("뽑힌 6개의 번호는 ");
+		for (int r=0; r<6; r++)
+		{
+			System.out.print(LottoNum[r]+" ");
+		}
+		System.out.println("입니다. ");
+		
+	}	
+	
+	static void Sorting (int[] LottoNum) 
+	{ 
+		int temp = 0; 
+		for(int i=0; i < 6; i++) 
+		{ 
+			for(int j=1; j < (6-i); j++) 
+			{ 
+				if(LottoNum[j-1] > LottoNum[j]) 
+				{ 
+					//swap the elements! 
+					temp = LottoNum[j-1]; 
+					LottoNum[j-1] = LottoNum[j]; 
+					LottoNum[j] = temp; 
+				} //if				
+			} //for
+		} //for
+	} //Sorting 메소드 끝	
+	
+} //class Lotto 끝
+
+
+class RandomPicking {
+	Random PickNum = new Random();
+	public int roll(){
+		return PickNum.nextInt(46)+1;
+	}
+	
+	public static void GetN(int i){
+	//do {roll();} while (
+	//6개의 번호를 뽑음 (중복없이)
+	//배열에 저장
+	//return 없음
+	}
+}
+

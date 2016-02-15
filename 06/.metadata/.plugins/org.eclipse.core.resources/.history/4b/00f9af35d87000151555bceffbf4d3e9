@@ -1,0 +1,45 @@
+
+public class Player extends YutBundle {
+	
+	int score; //현재까지 누적된 총점수를 score로 정의	
+	int time=1; //현재까지 몇 턴을 던졌는지 time으로 정의
+	
+	public void playing (){ //1턴 당 발생하는 사건
+		int result = throwingAll();
+			while (true){ //윷, 모가 나오는 이상 무한 재시도 가능
+				result = throwingAll();
+				if (result == 4){
+					score += result; //result가  윷, 모일때 while문 탈출 없이 계속진행
+					printResult(result);
+				} else if (result == 0){
+					score += 5;
+					printResult(result);
+				} else if ( result == 5 ) {
+					score -= 1; //result가 5이면 백도
+					printResult(result);
+					break; //player의 턴이 종료됨
+				} else {
+					score += result; //result가 1,2,3 이면 도, 개, 걸
+					printResult(result);
+					break; //player의 턴이 종료됨
+				}//한번 더 판단 if문 끝
+				
+			} //while 끝 = 턴 끝
+			time++; //턴 1회 증가시키기
+
+	} //playing끝
+	
+	private void printResult (int i){ ///////////////////////////////////////
+		// 1번째부터 10번째까지 결과를 각각 출력하게 만들 것
+		String ystate[] = new String []{"모","도","개","걸","윷","백도"}; //-1,0,1,2,3,4 
+			//출력을 위해 배면의 갯수에 따른 String을 배열로 선언
+		System.out.print(" "+ystate[i]);
+	}
+	
+	public static void whoisWinner (int a, int b){
+		boolean aWin = a > b ? true : false ;
+		if (aWin=true){
+			System.out.println("승자는 사용자 입니다!!!!!!!");
+		}
+	}
+}

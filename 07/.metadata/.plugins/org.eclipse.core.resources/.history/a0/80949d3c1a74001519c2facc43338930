@@ -1,0 +1,16 @@
+
+public class Truck extends Car {
+	int wheels; //바퀴수 4, 6, 10
+	int load; //1톤, 5톤, 10톤
+	
+	//op1, op2를 매개변수로 한 AutoMobile 클래스의 객체 생성자
+	Truck(String op1, String op2){
+		wheels = Integer.parseInt(op1);
+		load = Integer.parseInt(op2);
+	}
+	
+	void drive(){
+		System.out.println("최고 80Km/h 제한속도");
+	}
+	
+}

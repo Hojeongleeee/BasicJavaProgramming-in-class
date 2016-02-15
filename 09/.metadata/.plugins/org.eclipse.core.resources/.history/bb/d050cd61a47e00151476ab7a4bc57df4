@@ -1,0 +1,38 @@
+
+public class Results {
+
+	public static void main(String[] args) {
+		Person people[] = new Person[10]; //10명
+		//정상, 마른, 비만 저장할 배열 크키 3
+		for (int i=0;i<10;i++){
+			System.out.println("<"+(i+1)+"번>");
+			Person person = new Person();
+			people[i] = person;
+			System.out.println("건강지수:"+person.getScoreBMI());
+		}
+		
+		sorting(people);
+		//객체 검색해서 정상, 마른, 비만 각 배열값에 1씩 증가시키기
+		for(int i=0;i<10;i++){
+			System.out.println((i+1)+": "+people[i].getName()+" (건강지수:"+people[i].getScoreBMI()+")");
+		}
+	}
+
+	
+	//Bubble Sort
+	public static void sorting(Person people[]){
+		for (int i=0;i<10;i++){
+			for (int j=0;j<i;j++){
+				Person person1 = people[i];
+				Person person2 = people[j];
+				if (person1.compareTo(person2)==1){
+					//person1>person2일 경우 자리바꿈
+					people[i]=person2;
+					people[j]=person1;
+				}//if끝
+			}//j끝
+		}//i끝
+		
+	}//sorting끝
+}
+

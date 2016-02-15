@@ -1,0 +1,29 @@
+/* P1315594_7_이호정 (경영학부)
+ * 자동차 주문서 작성 프로그램
+ * AutoMobile.java - 자동차의 하위클래스, 승용차만의 속성/기능 기술
+ */
+class AutoMobile extends Car {
+	String color="백색";
+	int capacity;
+
+	//op1, op2를 매개변수로 한 AutoMobile 클래스의 객체 생성자
+	AutoMobile(String a, int b, String op1, int op2){
+		super(a,b);
+		color = op1;
+		capacity = op2;
+	}
+
+	public void drive(){
+		System.out.println("최고 110Km/h 제한속도");
+	}
+
+	public void result() {
+			System.out.println("-------구매한 자동차-------");
+			System.out.println("엔진번호:"+super.engineNum);
+			System.out.println("엔진타입:"+engineType);
+			System.out.println("엔진용량:"+engineCapa);
+			System.out.println("색상:"+color+"색");
+			System.out.println("승차인원:"+capacity+"명");
+	}
+
+}

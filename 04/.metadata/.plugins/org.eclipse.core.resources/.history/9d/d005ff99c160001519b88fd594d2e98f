@@ -1,0 +1,25 @@
+
+import java.util.Scanner;
+public class Practice4_1_1 {
+	private static int s;
+	public static void main(String[] args) {
+		
+		// TODO Auto-generated method stub
+		int h, l, s;
+		Scanner scan = new Scanner (System.in);
+		
+		System.out.print("≥Ù¿Ã:");
+		h = scan.nextInt();
+		System.out.print("πÿ∫Ø:");
+		l = scan.nextInt();
+		
+		s = Triangle(h,l);
+		System.out.println("≥–¿Ã:"+s);
+	}
+	public static int Triangle (int height, int length){
+		int tri;
+		tri = height*length/2;
+		return tri;
+		}
+
+}

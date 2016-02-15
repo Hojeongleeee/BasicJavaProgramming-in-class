@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class Results {
+
+	public static void main(String[] args) {
+		Person people[] = new Person[10];
+		for (int i=0;i<people.length;i++){
+			Person person = new Person();
+			people[i] = person;
+			System.out.print("test: "+person.getScoreBMI()+"\n");
+		}
+		
+//		for (int i=0;i<10;i++){
+//			Person person = new Person();
+//			people[i] = person;
+//			System.out.print("건강지수:"+person.getScoreBMI()+"\n");
+//		}
+		
+		people=sorting(people);
+		
+		//객체 검색해서 정상, 마른, 비만 각 배열값에 1씩 증가시키기
+		int normal=0, thin=0, fat=0; //인원수
+		
+		for (int i=people.length-1; i>=0; i--){
+			if (people[i].getScoreBMI()>90){
+				thin=people.length-1-i;
+			} else if (people[i].getScoreBMI()>120){
+				fat=i+1;
+			}
+		}
+		normal=people.length-fat-thin;
+		
+		//순서 출력
+		for(int i=0;i<10;i++){
+			System.out.println((i+1)+": "+people[i].getName()+" (건강지수:"+people[i].getScoreBMI()+")");
+		}
+		
+		//정상, 마른, 비만 인원수 출력
+		System.out.println("정상:"+normal+" 마른:"+thin+" 비만:"+fat);
+		
+	}
+
+	
+	//Bubble Sort
+	public static Person[] sorting(Person people[]){
+		for (int i=0;i<people.length;i++){
+			for (int j=i+1;j<people.length;j++){
+				Person person1 = people[i];
+				Person person2 = people[j];
+				if (person2.compareTo(person1)==1){
+					//person1>person2일 경우 자리바꿈
+					people[i]=person2;
+					people[j]=person1;
+				}//if끝
+			}//j끝
+		}//i끝
+		return people;
+		
+	}//sorting끝
+}
+
